@@ -18,20 +18,23 @@ async def analyze_messages(days: int = 30) -> str:
     messages = await get_messages_from_db()
 
     if not messages:
-        return "За этот период сообщений не найдено."
+        return "Tidak ada pesan yang ditemukan untuk periode ini.."
 
     # Склеиваем все сообщения в один текст
     text_data = "\n".join(messages)
 
     prompt = f"""
-    Вот список сообщений из моего Telegram-канала за последние {days} дней:
+    Berikut adalah daftar pesan dari saluran Telegram saya beberapa waktu terakhir. {days} hari:
     {text_data}
 
-    Сделай краткий анализ:
-    1. Какие темы чаще всего встречаются?
-    2. Какие достижения можно выделить?
-    3. Дай рекомендации для следующего месяца.
-    """
+    Berikan analisis singkat:
+1. Apa tema yang paling umum?
+
+2. Prestasi apa yang dapat disorot?
+
+3. Berikan rekomendasi untuk bulan depan.
+
+""
 
     # асинхронный запрос к Gemini
     response = await model.generate_content_async(prompt)
