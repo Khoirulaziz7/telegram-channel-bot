@@ -15,7 +15,7 @@ async def monthly_task(bot):
         await asyncio.sleep(60 * 60 * 24 * 30)  # ждём 30 дней
         messages = await get_messages_from_db(days=30)
         report = await analyze_messages(messages)
-        await bot.send_message(os.getenv('CHANNEL_ID'), f"📊 Ежемесячный отчёт:\n\n{report}")
+        await bot.send_message(os.getenv('CHANNEL_ID'), f"📊 Laporan bulanan:\n\n{report}")
 
 async def main():
     await init_db()
